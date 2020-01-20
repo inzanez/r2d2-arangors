@@ -1,9 +1,15 @@
 [package]
-name = "r2d2-arangors"
+name = "r2d2_arangors"
 version = "0.1.0"
-authors = ["Gitea <gitea@fake.local>"]
+authors = ["Rafael Aggeler"]
+license = "MIT"
+description = "ArangoDB support for the r2d2 connection pool"
+repository = "https://github.com/inzanez/r2d2-arangors"
 edition = "2018"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+arangors = "0.2.0"
+failure = "0.1.6"
+r2d2 = "0.8.8"
