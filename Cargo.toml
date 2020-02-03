@@ -10,6 +10,6 @@ edition = "2018"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-arangors = "0.2.0"
+arangors = { git="https://github.com/inzanez/arangors", branch = "master", optional = true }
 failure = "0.1.6"
 r2d2 = "0.8.8"
