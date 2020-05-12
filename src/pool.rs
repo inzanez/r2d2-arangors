@@ -1,18 +1,7 @@
-use failure::Error;
 use r2d2;
 use std::fmt;
 use std::result::Result;
-
-#[derive(Debug)]
-pub struct ArangoError(Error);
-
-impl fmt::Display for ArangoError {
-    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        write!(f, "{}", self.0)
-    }
-}
-
-impl std::error::Error for ArangoError {}
+use arangors::error::ClientError;
 
 #[derive(Clone, Debug)]
 pub struct ArangoDBConnectionManager {
@@ -40,20 +29,18 @@ impl ArangoDBConnectionManager {
 
 impl r2d2::ManageConnection for ArangoDBConnectionManager {
     type Connection = arangors::Connection;
-    type Error = ArangoError;
+    type Error = ClientError;
 
-    fn connect(&self) -> Result<arangors::Connection, ArangoError> {
+    fn connect(&self) -> Result<arangors::Connection, ClientError> {
         if self.use_jwt == true {
             arangors::Connection::establish_jwt(&self.url, &self.username, &self.password)
-                .map_err(|e| ArangoError(e))
         } else {
             arangors::Connection::establish_basic_auth(&self.url, &self.username, &self.password)
-                .map_err(|e| ArangoError(e))
         }
     }
 
-    fn is_valid(&self, conn: &mut arangors::Connection) -> Result<(), ArangoError> {
-        conn.validate_server().map_err(|e| ArangoError(e))
+    fn is_valid(&self, conn: &mut arangors::Connection) -> Result<(), ClientError> {
+        conn.validate_server()
     }
 
     fn has_broken(&self, conn: &mut arangors::Connection) -> bool {
