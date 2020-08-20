@@ -8,5 +8,5 @@ repository = "https://github.com/inzanez/r2d2-arangors"
 edition = "2018"
 
 [dependencies]
-arangors = { version = ">=0.3", features = ["reqwest_blocking"], default-features = false }
+arangors = { version = ">=0.4.3", features = ["reqwest_blocking"], default-features = false }
 r2d2 = "0.8.8"
