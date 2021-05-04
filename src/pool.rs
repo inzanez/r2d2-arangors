@@ -1,7 +1,8 @@
 use arangors::error::ClientError;
 use r2d2;
-use std::fmt;
 use std::result::Result;
+
+pub use uclient::ClientExt;
 
 #[derive(Clone, Debug)]
 pub struct ArangoDBConnectionManager {
@@ -40,10 +41,10 @@ impl r2d2::ManageConnection for ArangoDBConnectionManager {
     }
 
     fn is_valid(&self, conn: &mut arangors::Connection) -> Result<(), ClientError> {
-        arangors::connection::GenericConnection::<arangors::client::reqwest::ReqwestClient>::validate_server(&conn.url().to_string())
+        arangors::connection::GenericConnection::<uclient::reqwest::ReqwestClient>::validate_server(&conn.url().to_string())
     }
 
     fn has_broken(&self, conn: &mut arangors::Connection) -> bool {
-        arangors::connection::GenericConnection::<arangors::client::reqwest::ReqwestClient>::validate_server(&conn.url().to_string()).is_err()
+        arangors::connection::GenericConnection::<uclient::reqwest::ReqwestClient>::validate_server(&conn.url().to_string()).is_err()
     }
 }

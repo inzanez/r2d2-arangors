@@ -1,12 +1,10 @@
 #![crate_name = "r2d2_arangors"]
 
 pub mod pool;
-use pool::ArangoDBConnectionManager;
 
 #[cfg(test)]
 mod tests {
     use crate::pool::ArangoDBConnectionManager;
-    use arangors::Connection;
     use std::time::Duration;
     #[test]
     #[should_panic]
