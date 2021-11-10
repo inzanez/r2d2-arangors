@@ -8,6 +8,7 @@ repository = "https://github.com/inzanez/r2d2-arangors"
 edition = "2018"
 
 [dependencies]
-arangors = { version = "0.5", features = ["reqwest_blocking"], default-features = false }
+arangors = { git = "https://github.com/fMeow/arangors", branch = "main", features = ["reqwest_blocking"], default-features = false }
+#arangors = { version = "0.5", features = ["reqwest_blocking"], default-features = false }
 uclient = { version = "0.1", features = ["blocking_reqwest"], default-features = false }
 r2d2 = "0.8.9"
