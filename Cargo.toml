@@ -1,15 +1,14 @@
 [package]
 name = "r2d2_arangors"
-version = "0.1.0"
+version = "0.2.3"
 authors = ["Rafael Aggeler <r.aggeler@gmx.net>"]
 license = "MIT"
 description = "ArangoDB support for the r2d2 connection pool"
 repository = "https://github.com/inzanez/r2d2-arangors"
 edition = "2018"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
-
 [dependencies]
-arangors = { git="https://github.com/inzanez/arangors", branch = "master" }
-failure = "0.1.6"
-r2d2 = "0.8.8"
+arangors = { git = "https://github.com/fMeow/arangors", branch = "main", features = ["reqwest_blocking"], default-features = false }
+#arangors = { version = "0.5", features = ["reqwest_blocking"], default-features = false }
+uclient = { version = "0.1", features = ["blocking_reqwest"], default-features = false }
+r2d2 = "0.8.9"

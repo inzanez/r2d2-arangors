@@ -1,14 +1,11 @@
 #![crate_name = "r2d2_arangors"]
 
 pub mod pool;
-use pool::ArangoDBConnectionManager;
-
 
 #[cfg(test)]
 mod tests {
     use crate::pool::ArangoDBConnectionManager;
     use std::time::Duration;
-
     #[test]
     #[should_panic]
     fn connect() {
@@ -22,8 +19,8 @@ mod tests {
         let c = pool.get();
 
         match c {
-            Ok(_) => { println!("Valid") },
-            Err(e) => { println!("{}", e) },
+            Ok(_) => println!("Valid"),
+            Err(e) => println!("{}", e),
         }
     }
 }
