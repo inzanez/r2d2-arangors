@@ -1,7 +1,6 @@
 #![crate_name = "r2d2_arangors"]
 
 pub mod pool;
-use pool::ArangoDBConnectionManager;
 
 
 #[cfg(test)]

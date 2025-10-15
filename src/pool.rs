@@ -1,4 +1,3 @@
-use arangors::connection::role::Normal;
 use std::result::Result;
 use failure::Error;
 use std::fmt;
@@ -37,30 +36,30 @@ impl ArangoDBConnectionManager {
 }
 
 impl r2d2::ManageConnection for ArangoDBConnectionManager {
-    type Connection = arangors::Connection<Normal>;
+    type Connection = arangors::Connection;
     type Error = ArangoError;
 
-    fn connect(&self) -> Result<arangors::Connection<Normal>, ArangoError> {
+    fn connect(&self) -> Result<arangors::Connection, ArangoError> {
         if self.use_jwt == true {
             arangors::Connection::establish_jwt(
                 &self.url,
                 &self.username,
                 &self.password
-            ).map_err(|e| ArangoError(e))
+            ).map_err(|e| ArangoError(e.into()))
         } else {
             arangors::Connection::establish_basic_auth(
                 &self.url,
                 &self.username,
                 &self.password
-            ).map_err(|e| ArangoError(e))
+            ).map_err(|e| ArangoError(e.into()))
         }
     }
 
-    fn is_valid(&self, conn: &mut arangors::Connection<Normal>) -> Result<(), ArangoError> {
-        conn.validate_server().map_err(|e| ArangoError(e))
+    fn is_valid(&self, conn: &mut arangors::Connection) -> Result<(), ArangoError> {
+        Ok(())
     }
 
-    fn has_broken(&self, conn: &mut arangors::Connection<Normal>) -> bool {
-        conn.validate_server().is_err()
+    fn has_broken(&self, conn: &mut arangors::Connection) -> bool {
+        false
     }
 }
